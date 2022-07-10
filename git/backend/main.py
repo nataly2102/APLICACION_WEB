@@ -39,7 +39,7 @@ class regcliente(BaseModel):
 
 class ClienteIN(BaseModel):
     nombre: str
-    emial: str
+    email: str
 
 origin =[
     "https://8000-nataly2102-aplicacionwe-s2ngn7hd0f5.ws-us53.gitpod.io/",
@@ -99,22 +99,7 @@ async def clientes(level: int = Depends(get_current_level)):
 
 
 
-@app.post("/clientes/", response_model=Respuesta,status_code=status.HTTP_202_ACCEPTED,
-summary="AGREGA UN USUARIO",description="AGREGA UN USUARIO")
-async def clientes(level: int = Depends(get_current_level),nombre: str="", email:str=""):
-    if level == 1:
-        with sqlite3.connect(DATABASE_URL) as connection:
-            connection.row_factory = sqlite3.Row
-            cursor = connection.cursor()
-            cursor.execute("SELECT * FROM clientes")
-            response = cursor.fetchall()
-            return response
-    else:
-         raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Don't have permission to access this resource",
-            headers={"WWW-Authenticate": "Basic"},
-        )
+
 
 
 @app.get("/clientes/{id_cliente}", response_model=List[Cliente],status_code=status.HTTP_202_ACCEPTED, summary="MUESTRA UNA LISTA DE CLIENTES SEGUN SU ID",description="MUESTRA UNA LISTA DE CLIENTES SEGUN SU ID")
@@ -136,7 +121,7 @@ async def clientes(level: int = Depends(get_current_level),id_cliente: int=0):
 
 @app.post("/clientes/", response_model=Respuesta,status_code=status.HTTP_202_ACCEPTED,
 summary="AGREGACION DE USUARIOS",description="AGREGACION DE USUARIOS")
-async def post_cliente( cliente: ClienteIN, level: int = Depends(get_current_level),nombre: str="", email:str=""):
+async def post_cliente( cliente: ClienteIN, level: int = Depends(get_current_level)):
     if level == 1:
         with sqlite3.connect(DATABASE_URL) as connection:
             connection.row_factory = sqlite3.Row
