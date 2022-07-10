@@ -1,12 +1,10 @@
 function PostCliente(){
 
-
-    usernombre  = window.prompt('Usernombre:')
-    password    = window.prompt('Password:')
+    username = window.prompt('Username:')
+    password = window.prompt('Password:')
 
     let nombre = document.getElementById("nombre");
-    let email  = document.getElementById("email");
-
+    let email = document.getElementById("email");
     let payload = {
         "nombre": nombre.value,
         "email" : email.value,
@@ -20,7 +18,7 @@ function PostCliente(){
     request.open('POST', "https://8000-nataly2102-aplicacionwe-s2ngn7hd0f5.ws-us53.gitpod.io/clientes/",true);
     request.setRequestHeader("Content-Type", "application/json");
     request.setRequestHeader("Accept", "application/json");
-    request.setRequestHeader("Authorization", "Basic " + btoa(usernombre + ":" + password))
+    request.setRequestHeader("Authorization", "Basic " + btoa(username + ":" + password))
     
 
     
