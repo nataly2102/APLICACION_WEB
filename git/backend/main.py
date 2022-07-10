@@ -35,7 +35,11 @@ class Cliente(BaseModel):
 
 class regcliente(BaseModel):
     nombre: str
-    email : str    
+    email : str
+
+class ClienteIN(BaseModel):
+    nombre: str
+    emial: str
 
 origin =[
     "https://8000-nataly2102-aplicacionwe-s2ngn7hd0f5.ws-us53.gitpod.io/",
@@ -98,7 +102,7 @@ async def clientes(level: int = Depends(get_current_level)):
 @app.post("/clientes/", response_model=Respuesta,status_code=status.HTTP_202_ACCEPTED,
 summary="AGREGA UN USUARIO",description="AGREGA UN USUARIO")
 async def clientes(level: int = Depends(get_current_level),nombre: str="", email:str=""):
-    if level == 0:
+    if level == 1:
         with sqlite3.connect(DATABASE_URL) as connection:
             connection.row_factory = sqlite3.Row
             cursor = connection.cursor()
@@ -132,8 +136,8 @@ async def clientes(level: int = Depends(get_current_level),id_cliente: int=0):
 
 @app.post("/clientes/", response_model=Respuesta,status_code=status.HTTP_202_ACCEPTED,
 summary="AGREGACION DE USUARIOS",description="AGREGACION DE USUARIOS")
-async def post_cliente(level: int = Depends(get_current_level),nombre: str="", email:str=""):
-    if level == 0:
+async def post_cliente( cliente: ClienteIN, level: int = Depends(get_current_level),nombre: str="", email:str=""):
+    if level == 1:
         with sqlite3.connect(DATABASE_URL) as connection:
             connection.row_factory = sqlite3.Row
             cursor=connection.cursor()
@@ -152,12 +156,12 @@ async def post_cliente(level: int = Depends(get_current_level),nombre: str="", e
 
 @app.put("/clientes/", response_model=Respuesta,status_code=status.HTTP_202_ACCEPTED,
 summary="ACTUALIZACION DE USUARIOS",description="ACTUALIZACION DE USUARIOS")
-async def clientes_update(level: int = Depends(get_current_level), id_cliente: int=0, nombre: str="", email:str=""):
-    if level == 0:
+async def clientes_update(cliente: Cliente, level: int = Depends(get_current_level)):
+    if level == 1:
         with sqlite3.connect(DATABASE_URL) as connection:
             connection.row_factory = sqlite3.Row
             cursor = connection.cursor()
-            cursor.execute("UPDATE clientes SET nombre =?, email= ? WHERE id_cliente =?;",(nombre, email, id_cliente))
+            cursor.execute("UPDATE clientes SET nombre =?, email= ? WHERE id_cliente =?;",(cliente.nombre, cliente.email, cliente.id_cliente))
             connection.commit()
             response = {"message":"Actualizaste un cliente correctamente :)"}
             return response
@@ -172,11 +176,11 @@ async def clientes_update(level: int = Depends(get_current_level), id_cliente: i
 @app.delete("/clientes/", response_model=Respuesta,status_code=status.HTTP_202_ACCEPTED,
 summary="ELIMINACION DE USUARIOS",description="ELIMINACION DE USUARIOS")
 async def clientes_delete(level: int = Depends(get_current_level), id_cliente: int=0):
-    if level == 0:
-        with sqlite3.connect('code/sql/clientes.sqlite') as connection:
+    if level == 1:
+        with sqlite3.connect('sql/clientes.sqlite') as connection:
             connection.row_factory = sqlite3.Row
             cursor=connection.cursor()
-            cursor.execute("DELETE FROM clientes WHERE id_cliente ={}".format(int(id)))
+            cursor.execute("DELETE FROM clientes WHERE id_cliente = '{id_cliente}';".format(id_cliente=id_cliente))
             cursor.fetchall()
             response = {"message":"Eliminaste un cliente correctamente :("}
             return response

@@ -45,8 +45,8 @@ function getClientes() {
                 var email       = document.createElement('td');
 
                 detalle.innerHTML       = "<a href='cliente.html?"+json[i].id_cliente+"'>Detalle</a";
-                actualizar.innerHTML    = "<a href='/templates/update_clientes.html?"+json[i].id_cliente+"'>Actualizar</a";
-                borrar.innerHTML        = "<a href='/templates/delete_clientes.html?"+json[i].id_cliente+"'>Borrar</a";
+                actualizar.innerHTML    = "<a href='actualizar_cliente.html?"+json[i].id_cliente+"'>Actualizar</a";
+                borrar.innerHTML        = "<a href='eliminar_clientes.html?"+json[i].id_cliente+"'>Borrar</a";
                 id_cliente.innerHTML    = json[i].id_cliente;
                 nombre.innerHTML        = json[i].nombre;
                 email.innerHTML         = json[i].email;
