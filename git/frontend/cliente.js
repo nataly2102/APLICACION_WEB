@@ -2,15 +2,14 @@ function getCliente(){
 
     var request = new XMLHttpRequest();
     //Accede a la session de la pagina
-    usernombre = window.prompt('Usernombre:')
-    password = window.prompt('Password:')
-    
+    var token = sessionStorage.getItem('item');
+    console.log(token)
     var id_cliente = window.location.search.substring(1);
     console.log("id_cliente: " + id_cliente);
     
-    request.open('GET', "https://8000-nataly2102-aplicacionwe-s2ngn7hd0f5.ws-us53.gitpod.io/clientes/"+ id_cliente,true);
+    request.open('GET', "https://8000-nataly2102-aplicacionwe-kx8c8dnk4fb.ws-us60.gitpod.io/clientes/"+ id_cliente,true);
     request.setRequestHeader("Accept", "application/json");
-    request.setRequestHeader("Authorization", "Basic " + btoa(usernombre + ":" + password))
+    request.setRequestHeader("Authorization", "Bearer " + token)
     request.setRequestHeader("content-type", "application/json");
 
     request.onload = () => {

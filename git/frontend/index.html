@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
-
-
     <header>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>DOM javascript</title>
+        <meta charset="UTF-8">
+        <title>DOM JavaScript</title>
+       
     </header>
-
-
     <body>
-        <h1>Muestra todos los clientes</h1>
-        <script type="text/javascript" src="clientes.js"></script>
-        <a href="agregar_clientes.html">Añade un nuevo cliente</a>
-        <table id="tabla_clientes">
-        </table>
-
-
-        <script async>
-            document.body.onload = getClientes();
-        </script>
-
-
-    </body>
+        <h1>LOGIN</h1>
+        <form method="GET" name="form_usuario">
+            <label for="email">Email</label>
+            <br>
+            <input type="text" id="email" name="correo" />
+            <br>
+            <label for="password">Contraseña</label>
+            <br>
+            <input type="password" id="contra" name="password" />
+            <br>
+            <input type="button" value="Ingresar" onclick="Log()"/>
+            <script type="text/javascript" defer src="js/login.js"></script> 
+            <br>
+            <br>     
+        </form>
+        </body>
 </html>

@@ -1,24 +1,20 @@
 function PostCliente(){
-
-    username = window.prompt('Username:')
-    password = window.prompt('Password:')
-
+    var token = sessionStorage.getItem('item');
+    console.log(token)
     let nombre = document.getElementById("nombre");
     let email = document.getElementById("email");
     let payload = {
         "nombre": nombre.value,
         "email" : email.value,
     }
-
     console.log("nombre: " + nombre.value);
     console.log("email: "  + email.value);
     console.log(payload);
-    
     var request = new XMLHttpRequest();
-    request.open('POST', "https://8000-nataly2102-aplicacionwe-s2ngn7hd0f5.ws-us53.gitpod.io/clientes/",true);
+    request.open('POST', "https://8000-nataly2102-aplicacionwe-kx8c8dnk4fb.ws-us60.gitpod.io/clientes/",true);
     request.setRequestHeader("Content-Type", "application/json");
     request.setRequestHeader("Accept", "application/json");
-    request.setRequestHeader("Authorization", "Basic " + btoa(username + ":" + password))
+    request.setRequestHeader("Authorization", "Bearer " + token)
     
 
     
@@ -39,7 +35,7 @@ function PostCliente(){
             console.log("Status: " + status);
 
             alert(json.message);
-            window.location.replace("index.html")
+            window.location.replace("clientes_all.html")
         }
     };
     request.send(JSON.stringify(payload));

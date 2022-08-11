@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang= "es">
+    <header>
+        <meta charset="UTF-8">
+        <title>DOM JavaScript</title>
+    </header>
+    <body>
+        <h1>Clientes</h1>
+        <div id="main_container">
+            <table id = "tabla_clientes">
+                <thead id = "thead_clientes">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Detalles</th>
+                        <th>Actualizar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                </tbody>
+            </table>
+            <script src="lista.js"></script> 
+            <script>
+                document.body.onload = getClientes();
+            </script>
+        </div>
+        <div id="button_container">
+            <a href="agregar_clientes.html"><input type="button" class="button" value="Nuevo"></a>
+        </div>
+    </body>
+</html>
