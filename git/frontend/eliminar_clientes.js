@@ -27,7 +27,7 @@ function DeleteCliente(){
             console.log("Status: " + status);
 
             alert(json.message);
-            window.location.replace("clientes_all.html")
+            window.location.replace("clientes_all.html");
         }
     };
     request.send();

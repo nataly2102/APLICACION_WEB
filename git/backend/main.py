@@ -90,8 +90,6 @@ def get_current_level(credentials: HTTPBasicCredentials = Depends(security)): # 
                 headers={"WWW-Authenticate": "Basic"},
             )
     return user[0] """
-    
-
 
 @app.get("/clientes/", response_model=List[Cliente],status_code=status.HTTP_202_ACCEPTED,
 summary="MUESTRA UNA LISTA DE USUARIO",description="MUESTRA UNA LISTA DE USUARIO")
@@ -195,8 +193,8 @@ async def clientes_delete(credentials: HTTPAuthorizationCredentials = Depends(se
 
 @app.get("/user/validate/",
          status_code=status.HTTP_202_ACCEPTED,
-         summary="Ver token del usuario",
-         description="Ver token",
+         summary="Mostrar tocken del usuario",
+         description="Mosttrar tocken",
          tags=["auth"])
 async def get_token(credentials: HTTPBasicCredentials = Depends(securityBasic)):
     try:

@@ -1,32 +1,14 @@
 function PutCliente(){
-
+    var token = sessionStorage.getItem('item');
+    console.log(token)
     var request = new XMLHttpRequest();
-    usernombre = window.prompt('Usernombre:')
-    password = window.prompt('Password:')
-
     var id_cliente = window.location.search.substring(1);
-    
-    let id_clienteactual = id_cliente;
-    let nombre = document.getElementById("nombre");
-    let email  = document.getElementById("email");
-
-    let payload = {
-        "id_cliente": id_clienteactual,
-        "nombre": nombre.value,
-        "email" : email.value,
-    }
-
     console.log("id_cliente: " + id_cliente);
-    console.log("nombre: " + nombre.value);
-    console.log("email: "  + email.value);
-    console.log(payload);
-    
-    request.open('PUT', "https://8000-nataly2102-aplicacionwe-s2ngn7hd0f5.ws-us53.gitpod.io/clientes/",true);
+    request.open('PUT', "https://8000-nataly2102-aplicacionwe-kx8c8dnk4fb.ws-us60.gitpod.io/clientes/" + id_cliente,true);
     request.setRequestHeader("Accept", "application/json");
-
-    request.setRequestHeader("Authorization", "Basic " + btoa(usernombre + ":" + password))
+    request.setRequestHeader("Authorization", "Bearer " + token)
     request.setRequestHeader("content-type", "application/json");
-
+    
     request.onload = () => {
         
         const response = request.responseText;
@@ -44,8 +26,8 @@ function PutCliente(){
             console.log("Status: " + status);
 
             alert(json.message);
-            window.location.replace("index.html")
+            window.location.replace("clientes_all.html")
         }
     };
-    request.send(JSON.stringify(payload));
+    request.send;
 }

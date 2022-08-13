@@ -19,7 +19,7 @@ function Log(){
             console.log(data.token)
         }
         else{
-            alert("Usuario Incorrecto, intenta de nuevo");
+            alert("El usuario o contraseña no son correctos intenta de nuevo :)");
         }
     };
    request.send();
